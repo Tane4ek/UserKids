@@ -13,6 +13,10 @@ protocol KidsService {
     
     func addKidIfCan()
     
+    func updateName(index: Int, name: String)
+    
+    func updateAge(index: Int, age: String)
+    
     func updateKidIfCan(kid: Kids)
 
     func deleteKid()

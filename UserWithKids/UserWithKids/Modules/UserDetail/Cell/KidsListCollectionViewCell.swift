@@ -22,7 +22,7 @@ class KidsListCollectionViewCell: UICollectionViewCell {
     
     var textFieldIndex: Int?
     
-    private var delegate: UserTextFieldDelegate?
+    private var delegate: UserKidsTextFieldDelegate?
     
     //    MARK: - Init
     override init(frame: CGRect) {
@@ -54,12 +54,14 @@ class KidsListCollectionViewCell: UICollectionViewCell {
     private func setupKidNameView() {
         kidNameView = viewStyle(name: "Имя", placeholder: "Введите имя")
         kidNameView.textField.delegate = self
+        kidNameView.textField.tag = 0
         containerView.addSubview(kidNameView)
     }
     
     private func setupKidAgeView() {
         kidAgeView = viewStyle(name: "Возраст", placeholder: "Введите возраст")
         kidAgeView.textField.delegate = self
+        kidAgeView.textField.tag = 1
         containerView.addSubview(kidAgeView)
     }
     private func setupDeleteButton() {
@@ -128,7 +130,7 @@ extension KidsListCollectionViewCell: UITextFieldDelegate {
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
         
         if let delegate = delegate {
-            delegate.getData(data: updatedText, index: textFieldIndex ?? 0)
+            delegate.getData(data: updatedText, index: textField.tag)
         }
         
         return updatedText.count <= 20

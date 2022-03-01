@@ -8,11 +8,16 @@
 import Foundation
 import UIKit
 
-protocol UserTextFieldDelegate {
+protocol UserKidsTextFieldDelegate {
     
     func getData (data: String, index: Int)
     
     func dataTransfer(index: Int)
+}
+
+protocol UserTextFieldDelegate {
+    
+    func transfer(index: Int)
 }
 
 protocol UserDetailViewInput: AnyObject {
@@ -28,7 +33,7 @@ protocol UserDetailViewOutput: AnyObject {
     
     func buttonDeleteTapped()
     
-    func addKidName(name: String)
+    func addKidName(name: String, index: Int)
     
     func addKidAge(age: String)
     

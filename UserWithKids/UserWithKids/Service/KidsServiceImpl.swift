@@ -21,6 +21,13 @@ extension KidsServiceImpl: KidsService {
     func addKidIfCan() {
     }
     
+    func updateName(index: Int, name: String) {
+        userKids[index].name = name
+    }
+    
+    func updateAge(index: Int, age: String) {
+        userKids[index].age = age
+    }
     
     func updateKidIfCan(kid: Kids) {
 

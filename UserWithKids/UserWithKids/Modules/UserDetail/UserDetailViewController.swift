@@ -80,11 +80,14 @@ class UserDetailViewController: UIViewController {
     private  func setupUserNameView() {
         userNameView = viewStyle(name: "Имя", placeholder: "Введите имя")
         userNameView.delegate = self
+        userNameView.textField.tag = 0
         view.addSubview(userNameView)
     }
     
     private  func setupUserAgeView() {
         userAgeView = viewStyle(name: "Возраст", placeholder: "Введите возраст")
+        userAgeView.delegate = self
+        userAgeView.textField.tag = 1
         view.addSubview(userAgeView)
     }
     
@@ -238,11 +241,23 @@ extension UserDetailViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-//  MARK: - UserTextFielDelegate
+// MARK: - ChangeUser
+
 extension UserDetailViewController: UserTextFieldDelegate {
+    func transfer(index: Int) {
+        if index == 0 {
+            userAgeView.textField.becomeFirstResponder()
+        } else if index == 1 {
+            userAgeView.textField.resignFirstResponder()
+        }
+    }
+}
+
+//  MARK: - UserTextFielDelegate
+extension UserDetailViewController: UserKidsTextFieldDelegate {
     func getData(data: String, index: Int) {
         if index == 0 {
-            presenter.addKidName(name: data)
+            presenter.addKidName(name: data, index: index)
         } else if index == 1 {
             presenter.addKidAge(age: data)
         }
@@ -263,7 +278,7 @@ extension UserDetailViewController {
             let userInfo = notification.userInfo!
             let keyboardSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey]! as AnyObject).cgRectValue.size
             self.kidsListCollectionView.setContentInsetAndScrollIndicatorInsets(UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0))
-            self.kidsListCollectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: .top, animated: true)
+            self.kidsListCollectionView.scrollToItem(at: IndexPath.init(row: 1, section: 0), at: .top, animated: true)
         })
     }
     

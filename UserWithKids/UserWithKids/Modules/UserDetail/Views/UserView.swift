@@ -78,7 +78,9 @@ extension UserView: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        
+        if let delegate = delegate {
+            delegate.transfer(index: textField.tag)
+        }
         return true;
     }
 }

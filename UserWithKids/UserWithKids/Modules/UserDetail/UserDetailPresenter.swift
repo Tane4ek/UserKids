@@ -19,6 +19,7 @@ class UserDetailPresenter {
 
 extension UserDetailPresenter: UserDetailViewOutput {
     func viewWillAppear() {
+        models = kidsServiсe?.kids() ?? []
         view?.reloadUI()
     }
     
@@ -27,7 +28,7 @@ extension UserDetailPresenter: UserDetailViewOutput {
             return
         }
         let emptykid = Kids(id: UUID(), name: "", age: "")
-        models.append(emptykid)
+        kidsServiсe?.updateKidIfCan(kid: emptykid)
         viewWillAppear()
         print("Add")
     }
@@ -37,9 +38,9 @@ extension UserDetailPresenter: UserDetailViewOutput {
         print("delete")
     }
     
-    func addKidName(name: String) {
-        kid?.name = name
-        kidsServiсe?.updateKidIfCan(kid: kid ?? Kids(id: UUID(), name: "", age: ""))
+    func addKidName(name: String, index: Int) {
+        kidsServiсe?.updateName(index: index, name: name)
+        viewWillAppear()
         print(kid)
     }
     
@@ -60,8 +61,6 @@ extension UserDetailPresenter: UserDetailViewOutput {
     
     func buttonClearTapped() {
         router?.showAlert()
-        models = []
-       // kidsServiсe?.clearAll()
         viewWillAppear()
         print("clear")
     }

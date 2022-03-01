@@ -20,7 +20,8 @@ class UserDetailRouter {
     func showAlert() {
         let alert = UIAlertController(title: "Внимание!", message: "Вы уверены, что хотите очистить данные?", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Отмена", style: UIAlertAction.Style.default, handler: nil))
-        alert.addAction(UIAlertAction(title: "Очистить данные", style: UIAlertAction.Style.default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Очистить данные", style: UIAlertAction.Style.destructive, handler: { (action) -> Void in
+            self.serviceContainer.kidsService.clearAll()}))
         view?.present(alert, animated: true, completion: nil)
     }
 }
