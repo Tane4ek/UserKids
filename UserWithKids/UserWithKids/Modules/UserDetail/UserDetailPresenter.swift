@@ -26,12 +26,12 @@ extension UserDetailPresenter: UserDetailViewOutput {
     
     func addUserName(name: String) {
         kidsServiсe?.addUserName(name: name)
-        viewWillAppear()
+        //viewWillAppear()
     }
     
     func addUserAge(age: String) {
         kidsServiсe?.addUserAge(age: age)
-        viewWillAppear()
+       // viewWillAppear()
     }
     
     func currentUser() -> Person {
@@ -44,7 +44,7 @@ extension UserDetailPresenter: UserDetailViewOutput {
         }
         let emptykid = Person(id: UUID(), name: "", age: "")
         kidsServiсe?.updateKidIfCan(kid: emptykid)
-        viewWillAppear()
+       viewWillAppear()
         print("Add")
     }
     
@@ -56,12 +56,10 @@ extension UserDetailPresenter: UserDetailViewOutput {
     
     func addKidName(name: String, index: Int) {
         kidsServiсe?.updateName(index: index, name: name)
-        viewWillAppear()
     }
     
     func addKidAge(age: String, index: Int) {
         kidsServiсe?.updateAge(index: index, age: age)
-        viewWillAppear()
     }
     
     func numberOfItems() -> Int {

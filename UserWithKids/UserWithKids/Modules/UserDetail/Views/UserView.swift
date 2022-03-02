@@ -98,10 +98,10 @@ extension UserView: UITextFieldDelegate {
         guard let stringRange = Range(range, in: currentText) else { return false }
         
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-        
+        print(updatedText)
         if let delegate = delegate {
             delegate.getUserData(data: updatedText, index: textField.tag)
-            print(updatedText)
+           
         }
         
         return updatedText.count <= 20
