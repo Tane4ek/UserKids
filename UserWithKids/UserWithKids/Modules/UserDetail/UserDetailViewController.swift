@@ -74,18 +74,19 @@ class UserDetailViewController: UIViewController {
         setupButtonAdd()
         setupKidsListCollectionView()
         setupClearButton()
+        registerForKeyboardNotification()
         setupLayout()
     }
     
     private  func setupUserNameView() {
-        userNameView = viewStyle(name: "Имя", placeholder: "Введите имя")
+        userNameView = makeviewStyle(name: "Имя", placeholder: "Введите имя")
         userNameView.delegate = self
         userNameView.textField.tag = 0
         view.addSubview(userNameView)
     }
     
     private  func setupUserAgeView() {
-        userAgeView = viewStyle(name: "Возраст", placeholder: "Введите возраст")
+        userAgeView = makeviewStyle(name: "Возраст", placeholder: "Введите возраст")
         userAgeView.delegate = self
         userAgeView.textField.tag = 1
         view.addSubview(userAgeView)
@@ -166,13 +167,13 @@ class UserDetailViewController: UIViewController {
             kidsListCollectionView.topAnchor.constraint(equalTo: addButton.bottomAnchor, constant: Layout.KidsListCollectionView.inset),
             kidsListCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Layout.KidsListCollectionView.inset),
             kidsListCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Layout.KidsListCollectionView.inset),
-            kidsListCollectionView.bottomAnchor.constraint(equalTo: clearButton.topAnchor, constant: -Layout.subviewInset),
+            kidsListCollectionView.bottomAnchor.constraint(equalTo: clearButton.topAnchor),
         ])
     }
     
 //  MARK: - Style methods
     
-    private func viewStyle(name: String, placeholder: String) -> UserView {
+    private func makeviewStyle(name: String, placeholder: String) -> UserView {
         let view = UserView()
         view.titleLabel.text = name
         view.textField.placeholder = placeholder
@@ -204,7 +205,7 @@ extension UserDetailViewController: UserDetailViewInput {
 // MARK: - UICollectionViewDelegate
 extension UserDetailViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       
+        
     }
     
     
@@ -223,12 +224,7 @@ extension UserDetailViewController: UICollectionViewDataSource {
         let modelOfIndex = presenter.modelOfIndex(index: indexPath.row)
         cell.configure(model: modelOfIndex)
         cell.textFieldIndex = indexPath.row
-        cell.deleteButton.addTarget(self, action: #selector(deleteButtonTapped(_:)), for: .touchUpInside)
         return cell
-    }
-    
-    @objc func deleteButtonTapped(_ sender: UIButton) {
-        presenter.buttonDeleteTapped()
     }
 }
 
@@ -242,8 +238,7 @@ extension UserDetailViewController: UICollectionViewDelegateFlowLayout {
 }
 
 // MARK: - ChangeUser
-
-extension UserDetailViewController: UserTextFieldDelegate {
+extension UserDetailViewController: UserViewDelegate {
     func transfer(index: Int) {
         if index == 0 {
             userAgeView.textField.becomeFirstResponder()
@@ -254,20 +249,22 @@ extension UserDetailViewController: UserTextFieldDelegate {
 }
 
 //  MARK: - UserTextFielDelegate
-extension UserDetailViewController: UserKidsTextFieldDelegate {
-    func getData(data: String, index: Int) {
-        if index == 0 {
-            presenter.addKidName(name: data, index: index)
-        } else if index == 1 {
-            presenter.addKidAge(age: data)
+extension UserDetailViewController: KidsCellDelegate {
+    func getData(data: String, textIndex: Int, kidIndex: Int) {
+        print("данные с ячейки \(data)")
+        if textIndex == 0 {
+            presenter.addKidName(name: data, index: kidIndex)
+        } else if textIndex == 1 {
+            presenter.addKidAge(age: data, index: kidIndex)
         }
     }
     
     func dataTransfer(index: Int) {
-        if index == 0 {
-            let nextCell = self.kidsListCollectionView.cellForItem(at: IndexPath.init(row: 1, section: 0)) as! KidsListCollectionViewCell
-            nextCell.kidNameView.textField.becomeFirstResponder()
-        }
+    
+    }
+    
+    func deleteKid(index: Int) {
+        presenter.buttonDeleteTapped(index: index)
     }
 }
 
@@ -278,7 +275,6 @@ extension UserDetailViewController {
             let userInfo = notification.userInfo!
             let keyboardSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey]! as AnyObject).cgRectValue.size
             self.kidsListCollectionView.setContentInsetAndScrollIndicatorInsets(UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0))
-            self.kidsListCollectionView.scrollToItem(at: IndexPath.init(row: 1, section: 0), at: .top, animated: true)
         })
     }
     

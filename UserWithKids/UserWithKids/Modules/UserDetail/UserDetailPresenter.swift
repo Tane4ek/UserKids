@@ -10,11 +10,11 @@ import Foundation
 class UserDetailPresenter {
     
     weak var view: UserDetailViewInput?
-    var models: [Kids] = []
+    var models: [Person] = []
     var router: UserDetailRouter?
     var kidsServiсe: KidsService?
     
-    var kid: Kids?
+    var kid: Person?
 }
 
 extension UserDetailPresenter: UserDetailViewOutput {
@@ -27,14 +27,15 @@ extension UserDetailPresenter: UserDetailViewOutput {
         if models.count >= 5 {
             return
         }
-        let emptykid = Kids(id: UUID(), name: "", age: "")
+        let emptykid = Person(id: UUID(), name: "", age: "")
         kidsServiсe?.updateKidIfCan(kid: emptykid)
         viewWillAppear()
         print("Add")
     }
     
-    func buttonDeleteTapped() {
-        
+    func buttonDeleteTapped(index: Int) {
+        kidsServiсe?.deleteKid(index: index)
+        viewWillAppear()
         print("delete")
     }
     
@@ -44,9 +45,9 @@ extension UserDetailPresenter: UserDetailViewOutput {
         print(kid)
     }
     
-    func addKidAge(age: String) {
-        kid?.age = age
-        kidsServiсe?.updateKidIfCan(kid: kid ?? Kids(id: UUID(), name: "", age: ""))
+    func addKidAge(age: String, index: Int) {
+        kidsServiсe?.updateAge(index: index, age: age)
+        viewWillAppear()
         print(kid)
     }
     
@@ -54,7 +55,7 @@ extension UserDetailPresenter: UserDetailViewOutput {
         return models.count
     }
     
-    func modelOfIndex(index: Int) -> Kids {
+    func modelOfIndex(index: Int) -> Person {
         let currentModel = models[index]
         return currentModel
     }

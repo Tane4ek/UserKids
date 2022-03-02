@@ -9,12 +9,12 @@ import UIKit
 
 class KidsServiceImpl {
     
-    var userKids: [Kids] = []
+    var userKids: [Person] = []
 }
 
 extension KidsServiceImpl: KidsService {
     
-    func kids() -> [Kids] {
+    func kids() -> [Person] {
         return userKids
     }
     
@@ -29,7 +29,7 @@ extension KidsServiceImpl: KidsService {
         userKids[index].age = age
     }
     
-    func updateKidIfCan(kid: Kids) {
+    func updateKidIfCan(kid: Person) {
 
         var needAppear = true
         for i in 0..<userKids.count {
@@ -44,12 +44,12 @@ extension KidsServiceImpl: KidsService {
         }
     }
     
-    func deleteKid() {
-       
+    func deleteKid(index: Int) {
+        userKids.remove(at: index)
     }
     
     func clearAll() {
-        userKids = []
+        userKids.removeAll()
     }
 }
 

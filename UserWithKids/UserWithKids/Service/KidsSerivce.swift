@@ -9,7 +9,7 @@ import Foundation
 
 protocol KidsService {
     
-    func kids() -> [Kids]
+    func kids() -> [Person]
     
     func addKidIfCan()
     
@@ -17,9 +17,9 @@ protocol KidsService {
     
     func updateAge(index: Int, age: String)
     
-    func updateKidIfCan(kid: Kids)
+    func updateKidIfCan(kid: Person)
 
-    func deleteKid()
+    func deleteKid(index: Int)
     
     func clearAll() 
     

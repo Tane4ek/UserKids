@@ -16,13 +16,13 @@ class KidsListCollectionViewCell: UICollectionViewCell {
     static let reusedId = "KidsListCollectionViewCell"
     
     private var containerView = UIView(frame: .zero)
-    var kidNameView = UserView()
-    var kidAgeView = UserView()
-    var deleteButton = UIButton()
+    private var kidNameView = UserView()
+    private var kidAgeView = UserView()
+    private var deleteButton = UIButton()
     
     var textFieldIndex: Int?
     
-    private var delegate: UserKidsTextFieldDelegate?
+    weak var delegate: KidsCellDelegate?
     
     //    MARK: - Init
     override init(frame: CGRect) {
@@ -68,6 +68,7 @@ class KidsListCollectionViewCell: UICollectionViewCell {
         deleteButton.setTitle("Удалить", for: .normal)
         deleteButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         deleteButton.setTitleColor(UIColor.systemBlue, for: .normal)
+        deleteButton.addTarget(self, action: #selector(deleteButtonTapped(_:)), for: .touchUpInside)
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(deleteButton)
     }
@@ -105,20 +106,29 @@ class KidsListCollectionViewCell: UICollectionViewCell {
     
     
     //    MARK: - Configure
-    func configure (model: Kids) {
+    func configure (model: Person) {
         kidNameView.textField.text = model.name
         kidAgeView.textField.text = String(model.age)
      }
+    
+    @objc func deleteButtonTapped(_ sender: UIButton) {
+        if let delegate = delegate {
+            delegate.deleteKid(index: textFieldIndex ?? 0)
+        }
+    }
 }
 
 extension KidsListCollectionViewCell: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
+        if textField.tag == 0 {
         kidAgeView.textField.becomeFirstResponder()
-        if let delegate = delegate {
-            delegate.dataTransfer(index: textFieldIndex ?? 0)
+        } else if textField.tag == 1 {
+            kidAgeView.textField.resignFirstResponder()
         }
+        //if let delegate = delegate {
+       //     delegate.dataTransfer(index: textFieldIndex ?? 0)
+      //  }
         
         return true;
     }
@@ -130,7 +140,7 @@ extension KidsListCollectionViewCell: UITextFieldDelegate {
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
         
         if let delegate = delegate {
-            delegate.getData(data: updatedText, index: textField.tag)
+            delegate.getData(data: updatedText, textIndex: textField.tag, kidIndex: textFieldIndex ?? 0)
         }
         
         return updatedText.count <= 20

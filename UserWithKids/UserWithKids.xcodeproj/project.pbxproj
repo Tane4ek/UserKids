@@ -17,7 +17,7 @@
 		96390E9527CBA4CA00975CBA /* UserDetailConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96390E9427CBA4CA00975CBA /* UserDetailConfigurator.swift */; };
 		96390E9727CBA4FF00975CBA /* UserDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96390E9627CBA4FF00975CBA /* UserDetailPresenter.swift */; };
 		96390E9E27CBA5E200975CBA /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96390E9D27CBA5E200975CBA /* AppRouter.swift */; };
-		96390EA127CBA62B00975CBA /* Kids.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96390EA027CBA62B00975CBA /* Kids.swift */; };
+		96390EA127CBA62B00975CBA /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96390EA027CBA62B00975CBA /* Person.swift */; };
 		96390EA427CBA76200975CBA /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96390EA327CBA76200975CBA /* UserView.swift */; };
 		96390EA627CBAC2600975CBA /* KidsListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96390EA527CBAC2600975CBA /* KidsListCollectionViewCell.swift */; };
 		96390EA927CCFB1000975CBA /* ServiceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96390EA827CCFB1000975CBA /* ServiceContainer.swift */; };
@@ -38,7 +38,7 @@
 		96390E9427CBA4CA00975CBA /* UserDetailConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailConfigurator.swift; sourceTree = "<group>"; };
 		96390E9627CBA4FF00975CBA /* UserDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailPresenter.swift; sourceTree = "<group>"; };
 		96390E9D27CBA5E200975CBA /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
-		96390EA027CBA62B00975CBA /* Kids.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kids.swift; sourceTree = "<group>"; };
+		96390EA027CBA62B00975CBA /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		96390EA327CBA76200975CBA /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		96390EA527CBAC2600975CBA /* KidsListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidsListCollectionViewCell.swift; sourceTree = "<group>"; };
 		96390EA827CCFB1000975CBA /* ServiceContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceContainer.swift; sourceTree = "<group>"; };
@@ -139,7 +139,7 @@
 		96390E9F27CBA60700975CBA /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				96390EA027CBA62B00975CBA /* Kids.swift */,
+				96390EA027CBA62B00975CBA /* Person.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -241,7 +241,7 @@
 			files = (
 				96390EAE27CCFB7E00975CBA /* KidsServiceImpl.swift in Sources */,
 				96390EA627CBAC2600975CBA /* KidsListCollectionViewCell.swift in Sources */,
-				96390EA127CBA62B00975CBA /* Kids.swift in Sources */,
+				96390EA127CBA62B00975CBA /* Person.swift in Sources */,
 				96390E9527CBA4CA00975CBA /* UserDetailConfigurator.swift in Sources */,
 				96390E8027CBA40500975CBA /* UserDetailViewController.swift in Sources */,
 				96390E7C27CBA40500975CBA /* AppDelegate.swift in Sources */,

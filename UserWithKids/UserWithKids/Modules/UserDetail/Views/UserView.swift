@@ -22,7 +22,7 @@ class UserView: UIView {
     
     var titleLabel = UILabel()
     var textField = UITextField()
-    var delegate: UserTextFieldDelegate?
+    weak var delegate: UserViewDelegate?
     
 //    MARK: - Init
     override init(frame: CGRect) {

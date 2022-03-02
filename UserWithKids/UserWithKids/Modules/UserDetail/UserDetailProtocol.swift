@@ -8,14 +8,16 @@
 import Foundation
 import UIKit
 
-protocol UserKidsTextFieldDelegate {
+protocol KidsCellDelegate: AnyObject {
     
-    func getData (data: String, index: Int)
+    func getData (data: String, textIndex: Int, kidIndex: Int)
     
     func dataTransfer(index: Int)
+    
+    func deleteKid(index: Int)
 }
 
-protocol UserTextFieldDelegate {
+protocol UserViewDelegate: AnyObject {
     
     func transfer(index: Int)
 }
@@ -31,15 +33,15 @@ protocol UserDetailViewOutput: AnyObject {
     
     func buttonAddTapped()
     
-    func buttonDeleteTapped()
+    func buttonDeleteTapped(index: Int)
     
     func addKidName(name: String, index: Int)
     
-    func addKidAge(age: String)
+    func addKidAge(age: String, index: Int)
     
     func numberOfItems() -> Int
     
-    func modelOfIndex(index: Int) -> Kids
+    func modelOfIndex(index: Int) -> Person
     
     func buttonClearTapped()
 }
