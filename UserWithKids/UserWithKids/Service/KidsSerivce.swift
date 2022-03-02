@@ -11,7 +11,11 @@ protocol KidsService {
     
     func kids() -> [Person]
     
-    func addKidIfCan()
+    func currentUser() -> Person
+    
+    func addUserName(name: String)
+    
+    func addUserAge(age: String)
     
     func updateName(index: Int, name: String)
     

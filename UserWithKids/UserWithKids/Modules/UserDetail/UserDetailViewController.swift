@@ -81,6 +81,7 @@ class UserDetailViewController: UIViewController {
     private  func setupUserNameView() {
         userNameView = makeviewStyle(name: "Имя", placeholder: "Введите имя")
         userNameView.delegate = self
+        userNameView.textField.text = presenter.currentUser().name
         userNameView.textField.tag = 0
         view.addSubview(userNameView)
     }
@@ -88,6 +89,7 @@ class UserDetailViewController: UIViewController {
     private  func setupUserAgeView() {
         userAgeView = makeviewStyle(name: "Возраст", placeholder: "Введите возраст")
         userAgeView.delegate = self
+        userNameView.textField.text = presenter.currentUser().age
         userAgeView.textField.tag = 1
         view.addSubview(userAgeView)
     }
@@ -199,6 +201,8 @@ class UserDetailViewController: UIViewController {
 extension UserDetailViewController: UserDetailViewInput {
     func reloadUI() {
         kidsListCollectionView.reloadData()
+        userNameView.textField.text = presenter.currentUser().name
+        userAgeView.textField.text = presenter.currentUser().age
     }
 }
 
@@ -224,6 +228,7 @@ extension UserDetailViewController: UICollectionViewDataSource {
         let modelOfIndex = presenter.modelOfIndex(index: indexPath.row)
         cell.configure(model: modelOfIndex)
         cell.textFieldIndex = indexPath.row
+        cell.delegate = self
         return cell
     }
 }
@@ -239,6 +244,14 @@ extension UserDetailViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - ChangeUser
 extension UserDetailViewController: UserViewDelegate {
+    func getUserData(data: String, index: Int) {
+        if index == 0 {
+            presenter.addUserName(name: data)
+        } else if index == 1 {
+            presenter.addUserAge(age: data)
+        }
+    }
+    
     func transfer(index: Int) {
         if index == 0 {
             userAgeView.textField.becomeFirstResponder()
@@ -251,7 +264,6 @@ extension UserDetailViewController: UserViewDelegate {
 //  MARK: - UserTextFielDelegate
 extension UserDetailViewController: KidsCellDelegate {
     func getData(data: String, textIndex: Int, kidIndex: Int) {
-        print("данные с ячейки \(data)")
         if textIndex == 0 {
             presenter.addKidName(name: data, index: kidIndex)
         } else if textIndex == 1 {

@@ -14,13 +14,28 @@ class UserDetailPresenter {
     var router: UserDetailRouter?
     var kidsServiсe: KidsService?
     
-    var kid: Person?
+    var user: Person?
 }
 
 extension UserDetailPresenter: UserDetailViewOutput {
     func viewWillAppear() {
         models = kidsServiсe?.kids() ?? []
+        user = kidsServiсe?.currentUser()
         view?.reloadUI()
+    }
+    
+    func addUserName(name: String) {
+        kidsServiсe?.addUserName(name: name)
+        viewWillAppear()
+    }
+    
+    func addUserAge(age: String) {
+        kidsServiсe?.addUserAge(age: age)
+        viewWillAppear()
+    }
+    
+    func currentUser() -> Person {
+        return user ?? Person(id: UUID(), name: "", age: "")
     }
     
     func buttonAddTapped() {
@@ -42,13 +57,11 @@ extension UserDetailPresenter: UserDetailViewOutput {
     func addKidName(name: String, index: Int) {
         kidsServiсe?.updateName(index: index, name: name)
         viewWillAppear()
-        print(kid)
     }
     
     func addKidAge(age: String, index: Int) {
         kidsServiсe?.updateAge(index: index, age: age)
         viewWillAppear()
-        print(kid)
     }
     
     func numberOfItems() -> Int {

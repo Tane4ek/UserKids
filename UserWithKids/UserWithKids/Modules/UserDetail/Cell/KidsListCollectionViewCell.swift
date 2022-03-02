@@ -126,14 +126,19 @@ extension KidsListCollectionViewCell: UITextFieldDelegate {
         } else if textField.tag == 1 {
             kidAgeView.textField.resignFirstResponder()
         }
-        //if let delegate = delegate {
-       //     delegate.dataTransfer(index: textFieldIndex ?? 0)
-      //  }
-        
         return true;
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField.tag == 1 {
+            let allowCharacters = CharacterSet(charactersIn: "0123456789")
+            let characterSet = CharacterSet(charactersIn: string)
+            let shouldReplace = allowCharacters.isSuperset(of: characterSet)
+            if !shouldReplace {
+                return false
+            }
+        }
+        
         let currentText = textField.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
         

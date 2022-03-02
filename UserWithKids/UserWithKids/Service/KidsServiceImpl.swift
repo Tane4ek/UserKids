@@ -9,6 +9,7 @@ import UIKit
 
 class KidsServiceImpl {
     
+    var user: Person = Person(id: UUID(), name: "", age: "")
     var userKids: [Person] = []
 }
 
@@ -18,7 +19,16 @@ extension KidsServiceImpl: KidsService {
         return userKids
     }
     
-    func addKidIfCan() {
+    func currentUser() -> Person {
+        return user
+    }
+    
+    func addUserName(name: String) {
+        user.name = name
+    }
+    
+    func addUserAge(age: String) {
+        user.age = age
     }
     
     func updateName(index: Int, name: String) {
@@ -49,6 +59,8 @@ extension KidsServiceImpl: KidsService {
     }
     
     func clearAll() {
+        user.name = ""
+        user.age = ""
         userKids.removeAll()
     }
 }

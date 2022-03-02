@@ -20,6 +20,8 @@ protocol KidsCellDelegate: AnyObject {
 protocol UserViewDelegate: AnyObject {
     
     func transfer(index: Int)
+    
+    func getUserData(data: String, index: Int)
 }
 
 protocol UserDetailViewInput: AnyObject {
@@ -30,6 +32,12 @@ protocol UserDetailViewInput: AnyObject {
 protocol UserDetailViewOutput: AnyObject {
     
     func viewWillAppear()
+    
+    func addUserName(name: String)
+    
+    func addUserAge(age: String)
+    
+    func currentUser() -> Person
     
     func buttonAddTapped()
     

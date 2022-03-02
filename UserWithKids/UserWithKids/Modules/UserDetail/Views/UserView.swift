@@ -83,4 +83,27 @@ extension UserView: UITextFieldDelegate {
         }
         return true;
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField.tag == 1 {
+            let allowCharacters = CharacterSet(charactersIn: "0123456789")
+            let characterSet = CharacterSet(charactersIn: string)
+            let shouldReplace = allowCharacters.isSuperset(of: characterSet)
+            if !shouldReplace {
+                return false
+            }
+        }
+        
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        
+        if let delegate = delegate {
+            delegate.getUserData(data: updatedText, index: textField.tag)
+            print(updatedText)
+        }
+        
+        return updatedText.count <= 20
+    }
 }
