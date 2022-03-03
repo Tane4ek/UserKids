@@ -8,7 +8,6 @@
 import Foundation
 
 struct Person {
-    let id: UUID
     var name: String
     var age: String
 }

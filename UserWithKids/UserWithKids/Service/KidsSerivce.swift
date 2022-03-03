@@ -13,15 +13,15 @@ protocol KidsService {
     
     func currentUser() -> Person
     
-    func addUserName(name: String)
+    func updateUserName(name: String)
     
-    func addUserAge(age: String)
+    func updateUserAge(age: String)
     
     func updateName(index: Int, name: String)
     
     func updateAge(index: Int, age: String)
     
-    func updateKidIfCan(kid: Person)
+    func addKid(kid: Person)
 
     func deleteKid(index: Int)
     

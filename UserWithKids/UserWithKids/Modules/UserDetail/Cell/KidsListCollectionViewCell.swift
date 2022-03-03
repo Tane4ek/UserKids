@@ -24,7 +24,7 @@ class KidsListCollectionViewCell: UICollectionViewCell {
     
     weak var delegate: KidsCellDelegate?
     
-    //    MARK: - Init
+//    MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUICell()
@@ -34,7 +34,7 @@ class KidsListCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //  MARK: - Setup UI
+//  MARK: - Setup UI
     private func setupUICell() {
         setupContainerView()
         setupKidNameView()
@@ -73,7 +73,7 @@ class KidsListCollectionViewCell: UICollectionViewCell {
         containerView.addSubview(deleteButton)
     }
     
-    //    MARK: - Layout
+//    MARK: - Layout
     private func setupLayoutCell() {
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -95,7 +95,7 @@ class KidsListCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    //  MARK: - Style methods
+//  MARK: - Style methods
     private func viewStyle(name: String, placeholder: String) -> UserView {
         let view = UserView()
         view.titleLabel.text = name
@@ -105,7 +105,7 @@ class KidsListCollectionViewCell: UICollectionViewCell {
     }
     
     
-    //    MARK: - Configure
+//    MARK: - Configure
     func configure (model: Person) {
         kidNameView.textField.text = model.name
         kidAgeView.textField.text = String(model.age)
@@ -118,6 +118,8 @@ class KidsListCollectionViewCell: UICollectionViewCell {
     }
 }
 
+
+//  MARK: - UITextFieldDelegate
 extension KidsListCollectionViewCell: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

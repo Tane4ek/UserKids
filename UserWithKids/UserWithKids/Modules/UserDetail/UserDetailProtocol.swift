@@ -12,8 +12,6 @@ protocol KidsCellDelegate: AnyObject {
     
     func getData (data: String, textIndex: Int, kidIndex: Int)
     
-    func dataTransfer(index: Int)
-    
     func deleteKid(index: Int)
 }
 
@@ -32,6 +30,8 @@ protocol UserDetailViewInput: AnyObject {
 protocol UserDetailViewOutput: AnyObject {
     
     func viewWillAppear()
+    
+    func updateUI()
     
     func addUserName(name: String)
     

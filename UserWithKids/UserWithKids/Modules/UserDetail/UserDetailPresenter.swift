@@ -18,40 +18,40 @@ class UserDetailPresenter {
 }
 
 extension UserDetailPresenter: UserDetailViewOutput {
-    func viewWillAppear() {
+    func updateUI() {
         models = kidsServiсe?.kids() ?? []
         user = kidsServiсe?.currentUser()
         view?.reloadUI()
     }
     
+    func viewWillAppear() {
+        view?.reloadUI()
+    }
+    
     func addUserName(name: String) {
-        kidsServiсe?.addUserName(name: name)
-        //viewWillAppear()
+        kidsServiсe?.updateUserName(name: name)
     }
     
     func addUserAge(age: String) {
-        kidsServiсe?.addUserAge(age: age)
-       // viewWillAppear()
+        kidsServiсe?.updateUserAge(age: age)
     }
     
     func currentUser() -> Person {
-        return user ?? Person(id: UUID(), name: "", age: "")
+        return user ?? Person(name: "", age: "")
     }
     
     func buttonAddTapped() {
         if models.count >= 5 {
             return
         }
-        let emptykid = Person(id: UUID(), name: "", age: "")
-        kidsServiсe?.updateKidIfCan(kid: emptykid)
-       viewWillAppear()
-        print("Add")
+        let emptykid = Person(name: "", age: "")
+        kidsServiсe?.addKid(kid: emptykid)
+        updateUI()
     }
     
     func buttonDeleteTapped(index: Int) {
         kidsServiсe?.deleteKid(index: index)
-        viewWillAppear()
-        print("delete")
+        updateUI()
     }
     
     func addKidName(name: String, index: Int) {
@@ -72,9 +72,10 @@ extension UserDetailPresenter: UserDetailViewOutput {
     }
     
     func buttonClearTapped() {
-        router?.showAlert()
-        viewWillAppear()
-        print("clear")
+        let cleanAll = { [weak self] in
+            self?.kidsServiсe?.clearAll()
+            self?.updateUI()
+        }
+        router?.showAlert(actionHandler: cleanAll)
     }
-    
 }

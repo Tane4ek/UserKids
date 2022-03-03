@@ -17,11 +17,12 @@ class UserDetailRouter {
         self.serviceContainer = serviceContainer
     }
     
-    func showAlert() {
+    func showAlert(actionHandler: @escaping  () -> ()) {
         let alert = UIAlertController(title: "Внимание!", message: "Вы уверены, что хотите очистить данные?", preferredStyle: UIAlertController.Style.actionSheet)
         alert.addAction(UIAlertAction(title: "Отмена", style: UIAlertAction.Style.default, handler: nil))
-        alert.addAction(UIAlertAction(title: "Очистить данные", style: UIAlertAction.Style.destructive, handler: { (action) -> Void in
-            self.serviceContainer.kidsService.clearAll()}))
+        alert.addAction(UIAlertAction(title: "Очистить данные", style: UIAlertAction.Style.destructive, handler: { _ in
+            actionHandler()
+        }))
         view?.present(alert, animated: true, completion: nil)
     }
 }

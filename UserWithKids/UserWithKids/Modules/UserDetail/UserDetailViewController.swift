@@ -64,6 +64,13 @@ class UserDetailViewController: UIViewController {
             addButton.isHidden = false
         }
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if (touches.first) != nil {
+            view.endEditing(true)
+        }
+        super.touchesBegan(touches, with: event)
+    }
  
 //    MARK: Setup UI
     private func setupUI() {
@@ -184,6 +191,7 @@ class UserDetailViewController: UIViewController {
     }
 //    MARK: - Button action
     @objc private func addKidButtonTapped(_ sender: UIButton) {
+        view.endEditing(true)
         presenter.buttonAddTapped()
     }
     
@@ -211,8 +219,6 @@ extension UserDetailViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
     }
-    
-    
 }
 
 // MARK: - UICollectionViewDataSource
@@ -242,7 +248,7 @@ extension UserDetailViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-// MARK: - ChangeUser
+// MARK: - UserViewDelegate
 extension UserDetailViewController: UserViewDelegate {
     func getUserData(data: String, index: Int) {
         if index == 0 {
@@ -261,7 +267,7 @@ extension UserDetailViewController: UserViewDelegate {
     }
 }
 
-//  MARK: - UserTextFielDelegate
+//  MARK: - KidsCellDelegate
 extension UserDetailViewController: KidsCellDelegate {
     func getData(data: String, textIndex: Int, kidIndex: Int) {
         if textIndex == 0 {
@@ -269,10 +275,6 @@ extension UserDetailViewController: KidsCellDelegate {
         } else if textIndex == 1 {
             presenter.addKidAge(age: data, index: kidIndex)
         }
-    }
-    
-    func dataTransfer(index: Int) {
-    
     }
     
     func deleteKid(index: Int) {

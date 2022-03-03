@@ -9,7 +9,7 @@ import UIKit
 
 class KidsServiceImpl {
     
-    var user: Person = Person(id: UUID(), name: "", age: "")
+    var user: Person = Person(name: "", age: "")
     var userKids: [Person] = []
 }
 
@@ -23,11 +23,11 @@ extension KidsServiceImpl: KidsService {
         return user
     }
     
-    func addUserName(name: String) {
+    func updateUserName(name: String) {
         user.name = name
     }
     
-    func addUserAge(age: String) {
+    func updateUserAge(age: String) {
         user.age = age
     }
     
@@ -39,19 +39,8 @@ extension KidsServiceImpl: KidsService {
         userKids[index].age = age
     }
     
-    func updateKidIfCan(kid: Person) {
-
-        var needAppear = true
-        for i in 0..<userKids.count {
-            if userKids[i].id == kid.id {
-                userKids[i] = kid
-                needAppear = false
-                break
-            }
-        }
-        if needAppear {
+    func addKid(kid: Person) {
             userKids.append(kid)
-        }
     }
     
     func deleteKid(index: Int) {
